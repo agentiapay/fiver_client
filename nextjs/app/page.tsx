@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { TfiArrowUp } from "react-icons/tfi";
-
+import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -20,7 +20,6 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  // speech recognition hook
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
 
@@ -28,7 +27,6 @@ export default function Page() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // keep transcript in input while speaking
   useEffect(() => {
     if (listening) {
       setInput(transcript);
@@ -44,7 +42,7 @@ export default function Page() {
     setLoading(true);
 
     try {
-      const res = await axios.post("https://fiver-fastapi.vercel.app/chatbot", {
+      const res = await axios.post("https://shiny-parakeet-g465w4x4qwx6hwxq7-8000.app.github.dev/chatbot", {
         prompt: content,
       });
 
@@ -96,7 +94,7 @@ export default function Page() {
       </header>
 
       {/* Chat Area */}
-      <main className="flex-1 flex flex-col items-center justify-center px-4 mt-10">
+      <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4 mt-10">
         <div className="w-full max-w-2xl flex-1 overflow-y-auto flex flex-col gap-4 py-6">
           {messages.map((m, i) => (
             <div
@@ -104,16 +102,14 @@ export default function Page() {
               className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`px-4 py-3 rounded-2xl max-w-[75%] text-sm shadow-sm
+                className={`px-4 py-3 rounded-2xl text-sm shadow-sm break-words prose prose-sm max-w-full
                   ${
                     m.role === "user"
-                      ? "bg-gray-200 text-black"
-                      : "bg-gray-100 text-gray-800 rounded-bl-none  max-w-[85%]"
+                      ? "bg-blue-600 text-white rounded-br-none"
+                      : "bg-gray-100 text-gray-800 rounded-bl-none"
                   }`}
               >
-                <ReactMarkdown>
-              {m.text}
-              </ReactMarkdown>
+                <ReactMarkdown>{m.text}</ReactMarkdown>
               </div>
             </div>
           ))}
@@ -129,10 +125,10 @@ export default function Page() {
         </div>
 
         {/* Input Box */}
-        <div className="w-full max-w-3xl flex items-center gap-2 border rounded-full px-4 py-2 shadow-sm mb-6 bg-white">
+        <div className="w-full max-w-3xl flex items-center gap-2 border rounded-full px-3 sm:px-4 py-2 shadow-sm mb-6 bg-white">
           <input
             type="text"
-            className="flex-1 px-3 py-2 rounded-full text-sm outline-none"
+            className="flex-1 px-2 sm:px-3 py-2 rounded-full text-sm outline-none"
             placeholder="Ask anything..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -143,31 +139,22 @@ export default function Page() {
           {/* Voice Button */}
           <button
             onClick={handleVoiceToggle}
-            className={`w-10 h-10 flex items-center justify-center rounded-full transition ${
+            className={`w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full transition ${
               listening
                 ? "bg-red-500 text-white hover:bg-red-600"
                 : "bg-gray-300 text-gray-700 hover:bg-green-200 "
             }`}
           >
-            {/* 🎤 */}
-            {/* <MdOutlineMic /> */}
             <PiMicrophoneFill />
-
           </button>
 
           {/* Send Button */}
           <button
             onClick={() => sendMessage(input)}
             disabled={loading}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#292626]  text-white hover:bg-green-200 transition disabled:opacity-50"
+            className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-[#292626] text-white hover:bg-green-200 transition disabled:opacity-50"
           >
             <TfiArrowUp />
-            
-
-
-
-
-
           </button>
         </div>
       </main>
