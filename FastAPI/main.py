@@ -45,7 +45,7 @@ async def chatbot(data:UserPrompt):
     - Use code blocks (```language) for code examples.  
     - You may also add emojis 🎉🔥💡 to make responses engaging.  
 
-    Your goal is to provide helpful, informative, and detailed responses to any question asked, on any topic.
+    Your goal is to provide helpful, and informative responses to any question asked, on any topic.
 
       """, model=model
     )
