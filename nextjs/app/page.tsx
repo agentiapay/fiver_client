@@ -130,8 +130,8 @@ useEffect(() => {
                 className={`px-4 py-3 rounded-2xl text-sm shadow-sm break-words prose prose-sm max-w-full
                   ${
                     m.role === "user"
-                      ? "bg-blue-600 text-white rounded-br-none"
-                      : "bg-gray-100 text-gray-800 rounded-bl-none"
+                      ? "bg-gray-200 text-white "
+                      : "bg-gray-100 text-white"
                   }`}
               >
                 <ReactMarkdown>{m.text}</ReactMarkdown>
@@ -142,7 +142,7 @@ useEffect(() => {
           {loading && (
             <div className="flex justify-start">
               <div className="px-4 py-3 rounded-2xl bg-gray-100 text-gray-500 text-sm animate-pulse">
-                Typing...
+                Thinking...
               </div>
             </div>
           )}
