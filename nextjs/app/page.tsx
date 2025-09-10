@@ -94,8 +94,8 @@ export default function Page() {
       </header>
 
       {/* Chat Area */}
-      <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4 mt-10">
-        <div className="w-full max-w-2xl flex-1 overflow-y-auto flex flex-col gap-4 py-6">
+      <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4 >
+        <div className="w-full max-w-2xl flex-1 overflow-y-auto flex flex-col gap-4 py-4">
           {messages.map((m, i) => (
             <div
               key={i}
