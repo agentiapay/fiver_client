@@ -3,3 +3,4 @@ uvicorn
 openai-agents
 openai
 pydantic
+motor
