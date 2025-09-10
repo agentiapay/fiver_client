@@ -130,8 +130,8 @@ useEffect(() => {
                 className={`px-4 py-3 rounded-2xl text-sm shadow-sm break-words prose prose-sm max-w-full
                   ${
                     m.role === "user"
-                      ? "bg-gray-200 text-white "
-                      : "bg-gray-100 text-white"
+                      ? "bg-gray-200 text-black "
+                      : "bg-gray-100 text-black"
                   }`}
               >
                 <ReactMarkdown>{m.text}</ReactMarkdown>
