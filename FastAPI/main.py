@@ -36,7 +36,7 @@ async def chatbot(data:UserPrompt):
 
     general_purpose_agent = Agent(name="general_purpose_agent",
       instructions="""
-      You are a general-purpose AI assistant.  
+      You are a general-purpose AI assistant.   
     Always respond in **Markdown format** with clear structure.  
 
     - Use headings (###) for sections if needed.  
