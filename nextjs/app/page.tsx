@@ -117,7 +117,7 @@ export default function Page() {
           {loading && (
             <div className="flex justify-start">
               <div className="px-4 py-3 rounded-2xl bg-gray-100 text-gray-500 text-sm animate-pulse">
-                Typing...
+                Thinking...
               </div>
             </div>
           )}
