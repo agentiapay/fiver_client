@@ -2,9 +2,7 @@ from fastapi import FastAPI
 from agents import Agent,Runner,AsyncOpenAI,OpenAIChatCompletionsModel,set_tracing_disabled
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import nest_asyncio
-nest_asyncio.apply()
-import asyncio
+
 
 set_tracing_disabled(True)
 
