@@ -5,6 +5,8 @@ import { PiMicrophoneFill } from "react-icons/pi";
 import { TfiArrowUp } from "react-icons/tfi";
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -14,11 +16,32 @@ type Message = {
   text: string;
 };
 
+
+
 export default function Page() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
+
+const [conversationId, setConversationId] = useState<string>("");
+
+
+  useEffect(() => {
+  setConversationId(uuidv4()); // generate unique id once
+}, []);
+
+useEffect(() => {
+  const savedId = sessionStorage.getItem("conversationId");
+  if (savedId) {
+    setConversationId(savedId);
+  } else {
+    const newId = uuidv4();
+    setConversationId(newId);
+    sessionStorage.setItem("conversationId", newId);
+  }
+}, []);
+
 
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
@@ -34,34 +57,36 @@ export default function Page() {
   }, [transcript, listening]);
 
   const sendMessage = async (content: string) => {
-    if (!content.trim()) return;
+  if (!content.trim()) return;
 
-    setMessages((prev) => [...prev, { role: "user", text: content }]);
-    setInput("");
-    resetTranscript();
-    setLoading(true);
+  setMessages((prev) => [...prev, { role: "user", text: content }]);
+  setInput("");
+  resetTranscript();
+  setLoading(true);
 
-    try {
-      const res = await axios.post("https://fiver-fastapi.vercel.app/chatbot", {
-        prompt: content,
-      });
+  try {
+    const res = await axios.post("https://shiny-parakeet-g465w4x4qwx6hwxq7-8000.app.github.dev/chatbot", {
+      prompt: content,
+      conversation_id: conversationId, // <-- send conversation_id
+    });
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          text: res.data.response || "⚠️ No response from server",
-        },
-      ]);
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", text: "❌ Error connecting to server." },
-      ]);
-    } finally {
-      setLoading(false);
-    }
-  };
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "assistant",
+        text: res.data.response || "⚠️ No response from server",
+      },
+    ]);
+  } catch {
+    setMessages((prev) => [
+      ...prev,
+      { role: "assistant", text: "❌ Error connecting to server." },
+    ]);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !loading) {
@@ -87,15 +112,15 @@ export default function Page() {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-white">
+    <div className="h-screen w-screen flex flex-col bg-gray">
       {/* Logo Header */}
       <header className="absolute top-4 w-full flex justify-center z-10">
         <h1 className="text-lg font-semibold text-gray-800">🤖 AI Agent</h1>
       </header>
 
       {/* Chat Area */}
-      <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4 >
-        <div className="w-full max-w-2xl flex-1 overflow-y-auto flex flex-col gap-4 py-4">
+      <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4 mt-10">
+        <div className="w-full max-w-2xl flex-1 overflow-y-auto flex flex-col gap-4 py-6">
           {messages.map((m, i) => (
             <div
               key={i}
@@ -105,8 +130,8 @@ export default function Page() {
                 className={`px-4 py-3 rounded-2xl text-sm shadow-sm break-words prose prose-sm max-w-full
                   ${
                     m.role === "user"
-                      ? "bg-gray-200 text-black "
-                      : "bg-gray-100 text-black "
+                      ? "bg-blue-600 text-white rounded-br-none"
+                      : "bg-gray-100 text-gray-800 rounded-bl-none"
                   }`}
               >
                 <ReactMarkdown>{m.text}</ReactMarkdown>
@@ -117,7 +142,7 @@ export default function Page() {
           {loading && (
             <div className="flex justify-start">
               <div className="px-4 py-3 rounded-2xl bg-gray-100 text-gray-500 text-sm animate-pulse">
-                Thinking...
+                Typing...
               </div>
             </div>
           )}
@@ -128,7 +153,7 @@ export default function Page() {
         <div className="w-full max-w-3xl flex items-center gap-2 border rounded-full px-3 sm:px-4 py-2 shadow-sm mb-6 bg-white">
           <input
             type="text"
-            className="flex-1 px-2 sm:px-3 py-2 rounded-full text-sm text-[black] outline-none"
+            className="flex-1 px-2 sm:px-3 py-2 rounded-full text-sm outline-none"
             placeholder="Ask anything..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
