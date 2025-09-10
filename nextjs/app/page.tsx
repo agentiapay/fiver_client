@@ -128,7 +128,7 @@ export default function Page() {
         <div className="w-full max-w-3xl flex items-center gap-2 border rounded-full px-3 sm:px-4 py-2 shadow-sm mb-6 bg-white">
           <input
             type="text"
-            className="flex-1 px-2 sm:px-3 py-2 rounded-full text-sm outline-none"
+            className="flex-1 px-2 sm:px-3 py-2 rounded-full text-sm text-[black] outline-none"
             placeholder="Ask anything..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
