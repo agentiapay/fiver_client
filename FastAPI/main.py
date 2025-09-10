@@ -12,7 +12,7 @@ set_tracing_disabled(True)
 # =======================
 MONGO_URL = "mongodb+srv://freeskills:NajafAli5$@cluster0.8mlufak.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client_db = AsyncIOMotorClient(MONGO_URL)
-db = client_db["chat_db"]                 # Database name
+db = client_db["chat_db"]                 # Database name 
 collection = db["conversations"]          # Collection name
 
 # =======================
