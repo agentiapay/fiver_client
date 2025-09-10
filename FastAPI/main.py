@@ -2,6 +2,10 @@ from fastapi import FastAPI
 from agents import Agent,Runner,AsyncOpenAI,OpenAIChatCompletionsModel,set_tracing_disabled
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import nest_asyncio
+nest_asyncio.apply()
+import asyncio
+
 set_tracing_disabled(True)
 
 # api key setup
@@ -50,7 +54,11 @@ async def chatbot(data:UserPrompt):
       """, model=model
     )
 
-    result = await Runner.run(general_purpose_agent, data.prompt)
-    response = result.final_output
+    result = Runner.run_streamed(general_purpose_agent, data.prompt)
+    async for event in result.stream_events():
+        if event.type == "raw_response_event" and isinstance(event.data, ResponseTextDeltaEvent):
+            print(event.data.delta, end="", flush=True)
+
+    response = await streaming()
     print(response)
     return {"response":response}
