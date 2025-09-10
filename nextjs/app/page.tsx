@@ -87,7 +87,7 @@ export default function Page() {
   };
 
   return (
-    <div className="h-[90hv] w-screen flex flex-col bg-white">
+    <div className="h-[90vh] w-screen flex flex-col bg-white">
       {/* Logo Header */}
       <header className="absolute top-4 w-full flex justify-center z-10">
         <h1 className="text-lg font-semibold text-gray-800">🤖 AI Agent</h1>
