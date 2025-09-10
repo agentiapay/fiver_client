@@ -44,7 +44,7 @@ export default function Page() {
     setLoading(true);
 
     try {
-      const res = await axios.post("https://shiny-parakeet-g465w4x4qwx6hwxq7-8000.app.github.dev/chatbot", {
+      const res = await axios.post("https://fiver-fastapi.vercel.app/chatbot", {
         prompt: content,
       });
 
