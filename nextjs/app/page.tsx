@@ -108,7 +108,7 @@ export default function Page() {
                   ${
                     m.role === "user"
                       ? "bg-gray-200 text-black"
-                      : "bg-gray-100 text-gray-800 rounded-bl-none"
+                      : "bg-gray-100 text-gray-800 rounded-bl-none  max-w-[85%]"
                   }`}
               >
                 <ReactMarkdown>
