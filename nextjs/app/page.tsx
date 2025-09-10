@@ -111,7 +111,9 @@ export default function Page() {
                       : "bg-gray-100 text-gray-800 rounded-bl-none"
                   }`}
               >
-                {m.text}
+                <ReactMarkdown>
+              {m.text}
+              </ReactMarkdown>
               </div>
             </div>
           ))}
