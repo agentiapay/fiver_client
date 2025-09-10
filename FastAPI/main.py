@@ -54,11 +54,8 @@ async def chatbot(data:UserPrompt):
       """, model=model
     )
 
-    result = Runner.run_streamed(general_purpose_agent, data.prompt)
-    async for event in result.stream_events():
-        if event.type == "raw_response_event" and isinstance(event.data, ResponseTextDeltaEvent):
-            print(event.data.delta, end="", flush=True)
+    result = await Runner.run(general_purpose_agent, data.prompt)
 
-    response = await streaming()
+    response = result.final_output
     print(response)
     return {"response":response}
