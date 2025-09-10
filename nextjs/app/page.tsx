@@ -42,7 +42,7 @@ export default function Page() {
     setLoading(true);
 
     try {
-      const res = await axios.post("https://shiny-parakeet-g465w4x4qwx6hwxq7-8000.app.github.dev/chatbot", {
+      const res = await axios.post("https://fiver-fastapi.vercel.app/chatbot", {
         prompt: content,
       });
 
@@ -87,7 +87,7 @@ export default function Page() {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-white">
+    <div className="h-[90hv] w-screen flex flex-col bg-white">
       {/* Logo Header */}
       <header className="absolute top-4 w-full flex justify-center z-10">
         <h1 className="text-lg font-semibold text-gray-800">🤖 AI Agent</h1>
@@ -105,8 +105,8 @@ export default function Page() {
                 className={`px-4 py-3 rounded-2xl text-sm shadow-sm break-words prose prose-sm max-w-full
                   ${
                     m.role === "user"
-                      ? "bg-blue-600 text-white rounded-br-none"
-                      : "bg-gray-100 text-gray-800 rounded-bl-none"
+                      ? "bg-gray-200 text-black "
+                      : "bg-gray-100 text-black "
                   }`}
               >
                 <ReactMarkdown>{m.text}</ReactMarkdown>
