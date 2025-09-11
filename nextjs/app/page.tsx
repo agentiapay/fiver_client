@@ -111,14 +111,14 @@ useEffect(() => {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-[white]">
+    <div className="h-screen w-screen flex flex-col bg-white">
       {/* Logo Header */}
       <header className="absolute top-4 w-full flex justify-center z-10">
         <h1 className="text-lg font-semibold text-gray-800">🤖 AI Agent</h1>
       </header>
 
       {/* Chat Area */}
-      <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4 mt-10">
+      <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4">
         <div className="w-full max-w-2xl flex-1 overflow-y-auto flex flex-col gap-4 py-6">
           {messages.map((m, i) => (
             <div
@@ -152,7 +152,7 @@ useEffect(() => {
         <div className="w-full max-w-3xl flex items-center gap-2 border rounded-full px-3 sm:px-4 py-2 shadow-sm mb-6 bg-white text-black">
           <input
             type="text"
-            className="flex-1 px-2 sm:px-3 py-2 rounded-full text-sm text-[black] outline-none"
+            className="flex-1 px-2 sm:px-3 py-2 rounded-full text-sm text-black outline-none"
             placeholder="Ask anything..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
