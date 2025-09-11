@@ -156,7 +156,6 @@ The only source of truth is this variable: '{Cardiovascular_Assessment_Questions
 - Highlight key terms with **bold** and *italic*.  
 - Use bullet points for clarity.  
 - Add emojis 🎉🔥💡 to make responses engaging.  
-- Always append *(From the provided Cardiovascular_Assessment_Questions data)* in relevant questions.  
 
 Now begin the interview by asking the **first question from Cardiovascular_Assessment_Questions**.  
 
