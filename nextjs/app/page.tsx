@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useRef, useEffect } from "react";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { TfiArrowUp } from "react-icons/tfi";
