@@ -10,7 +10,7 @@ set_tracing_disabled(True)
 # ======================= 
 # MongoDB Connection
 # =======================
-MONGO_URL = "mongodb+srv://freeskills:NajafAli5$@cluster0.8mlufak.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URL = "your mango "url
 client_db = AsyncIOMotorClient(MONGO_URL)
 db = client_db["chat_db"]                 # Database name
 collection = db["conversations"]          # Collection name
@@ -19,7 +19,7 @@ collection = db["conversations"]          # Collection name
 # API Key + Model Setup
 # =======================
 client = AsyncOpenAI(
-    api_key="AIzaSyCMpBWF-tOzuVQ9inIyVlPo7VFCJ6b9dd0",
+    api_key="your gemini api key",
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
 )
 model = OpenAIChatCompletionsModel(openai_client=client, model="gemini-2.5-flash")
@@ -48,7 +48,6 @@ app.add_middleware(
 @app.get("/")
 async def home():
     return {"Status": "Done"}
-
 
 # =======================
 # Chatbot Endpoint
