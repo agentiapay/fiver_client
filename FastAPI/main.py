@@ -4,7 +4,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from motor.motor_asyncio import AsyncIOMotorClient
 from datetime import datetime
-# import uuid
+import uuid
+from markitdown import MarkItDown
+
 set_tracing_disabled(True)
 
 # =======================
@@ -12,7 +14,7 @@ set_tracing_disabled(True)
 # =======================
 MONGO_URL = "mongodb+srv://freeskills:NajafAli5$@cluster0.8mlufak.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client_db = AsyncIOMotorClient(MONGO_URL)
-db = client_db["chat_db"]                 # Database name 
+db = client_db["chat_db"]                 # Database name
 collection = db["conversations"]          # Collection name
 
 # =======================
@@ -44,15 +46,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/")
 async def home():
     return {"Status": "Done"}
+
 
 # =======================
 # Chatbot Endpoint
 # =======================
 @app.post("/chatbot")
 async def chatbot(data: UserPrompt):
+
+    # pdf reader
+    md = MarkItDown()
+    result = md.convert("nlm.pdf")
+    pdf_data = result.text_content
     # ---- 1. Fetch old conversation history ----
     # conversation_id = str(uuid.uuid4())
     history_doc = await collection.find_one({"conversation_id": data.conversation_id})
@@ -73,6 +82,11 @@ async def chatbot(data: UserPrompt):
         Conversation so far:
         {history_text}
 
+        Read the following data carefully: '{pdf_data}'.
+Answer the user query strictly based on this data.
+Provide a concise, human-like response.
+Include a short note about the source of information (from the given data), but do not add any extra details or assumptions.
+don't add: 'Based on the information provided' give direct response.
         Now continue the conversation. 
         - Use headings (###) for sections if needed.
         - Use **bold** and *italic* for emphasis.
