@@ -111,7 +111,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-gray">
+    <div className="h-screen w-screen flex flex-col bg-[white]">
       {/* Logo Header */}
       <header className="absolute top-4 w-full flex justify-center z-10">
         <h1 className="text-lg font-semibold text-gray-800">🤖 AI Agent</h1>
@@ -141,7 +141,7 @@ useEffect(() => {
           {loading && (
             <div className="flex justify-start">
               <div className="px-4 py-3 rounded-2xl bg-gray-100 text-gray-500 text-sm animate-pulse">
-                Thinking...
+                Responding...
               </div>
             </div>
           )}
