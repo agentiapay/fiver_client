@@ -5,7 +5,6 @@ from pydantic import BaseModel
 from motor.motor_asyncio import AsyncIOMotorClient
 from datetime import datetime
 
-
 set_tracing_disabled(True)
 
 # ======================= 
@@ -39,7 +38,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://fiver-agent.vercel.app/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -139,7 +138,7 @@ Follow-Up:
 Your role is to conduct a structured **cardiovascular and peripheral vascular interview**.  
 
 Conversation so far:  
-{history_text}  
+'{history_text}'  
 
 The only source of truth is this variable: '{Cardiovascular_Assessment_Questions}'.  
 - You must strictly ask questions from this variable only.  
