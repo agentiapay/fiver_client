@@ -18,10 +18,11 @@ You don’t need to code anything. Just follow these simple steps:
 
 ### 2. Set Environment Variables
 After importing the project, go to your Vercel project settings → **Environment Variables**.  
-Add these two:
+Add these :
 
-- `API_URL` → the URL of your FastAPI backend (we will give you this).  
-- `GEMINI_API_KEY` → your Google Gemini API Key.  
+- `API_URL` → the URL of your FastAPI backend in nextjs frontend> app/page.tsx. 
+- `GEMINI_API_KEY` → your Google Gemini API Key in fastapi> main.py.
+- `Mangodb URL` → your mango url in fastapi> main.py.  
 
 That’s it! 🎉
 
