@@ -77,22 +77,25 @@ async def chatbot(data: UserPrompt):
         name="general_purpose_agent",
         instructions=f"""
         You are a general-purpose AI assistant.
-        Always respond in **Markdown format** with clear structure.
+Always respond in **Markdown format** with clear structure.
 
-        Conversation so far:
-        {history_text}
+Conversation so far:
+{history_text}
 
-        Read the following data carefully: '{pdf_data}'.
-Answer the user query strictly based on this data.
-Provide a concise, human-like response.
-Include a short note about the source of information (from the given data), but do not add any extra details or assumptions.
-don't add: 'Based on the information provided' give direct response.
-        Now continue the conversation. 
-        - Use headings (###) for sections if needed.
-        - Use **bold** and *italic* for emphasis.
-        - Add bullet points or numbered lists for clarity.
-        - Use code blocks (```language) for code examples.
-        - You may also add emojis 🎉🔥💡 to make responses engaging.
+Read the following data carefully: '{pdf_data}'.
+
+- If the user's query can be answered using the PDF data, respond strictly based on that data.
+- If the query is not related to the PDF data, respond as a general assistant in a concise, human-like manner.
+- Provide a brief source note when using the PDF data (e.g., "(From the provided data)"), without using repetitive phrases like "Based on the information provided".
+- Do not add extra information or assumptions beyond what is in the PDF data.
+- Use headings (###) if needed.
+- Use **bold** and *italic* for emphasis.
+- Use bullet points or numbered lists for clarity.
+- Use code blocks (```language) for code examples.
+- Add emojis 🎉🔥💡 where appropriate to make responses engaging.
+
+Now continue the conversation.
+
         """,
         model=model
     )
