@@ -64,7 +64,7 @@ useEffect(() => {
   setLoading(true);
 
   try {
-    const res = await axios.post("https://fiver-fastapi.vercel.app/chatbot", {
+    const res = await axios.post("your fastapi backend url here/chatbot", {
       prompt: content,
       conversation_id: conversationId, // <-- send conversation_id
     });
