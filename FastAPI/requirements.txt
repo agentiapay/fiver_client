@@ -4,5 +4,3 @@ openai-agents
 openai
 pydantic
 motor
-markitdown
-markitdown['pdf']
