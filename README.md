@@ -37,6 +37,8 @@ That’s it! 🎉
 ## 📝 Notes
 - You only need to give  **your API URL** and **Gemini API Key**.  
 - You don’t have to change any code yourself.  
-- Everything else (chatbot logic, design) is already handled.  
+- Everything else (chatbot logic, design) is already handled.
+- i seperately added main1.py with realtime voice assistant
+- also add app/voice/page.tsx for realtime voice frontend
 
 ---
